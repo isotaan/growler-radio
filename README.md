@@ -25,8 +25,10 @@ The way that Growler Radio works is that you feed it a table of songs as a playl
     - Put the file path of your intro .mp3 and the .mp3's length (in seconds). At present, an intro .mp3 is **mandatory.**
       * ```musicPlaylistVietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}```
     - For each song in the table, put the path, length of the song (in seconds), and the name of the file. It should look something like: 
-       ``` [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" },
-       ``` [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
+       ``` 
+       [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" },
+       [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
+       ```
 
         
     * You can name the files whatever you want, just keep in mind that you *must* have valid files that STTS will recognize.
