@@ -7,9 +7,9 @@ This jukebox script is lightweight because all you need in the .miz file are two
 
 #### Disclaimer: 
 * Use at your own risk. 
-* Growler Radio requires editing MissionScripting.lua, so malicious code may be run from your DCS. 
+* Growler Radio requires editing MissionScripting.lua which protects you from malicious code from being run from DCS.
 * This is to be used for non-profit entertainment purposes only. 
-* This may eat up your internet bandwidth if you do not use it carefully. Playing hours of .mp3s via SRS endlessly 
+* This may eat up your internet bandwidth if you do not use it carefully. Playing hours of .mp3s via SRS endlessly may burn through your bandwidth cap.
 
 # Setup Part 1 - DCS Server
 1. Download [SimpleRadioStandalone](https://github.com/ciribob/DCS-SimpleRadioStandalone) and install it on your server. Do all of the necessary things to configure and run SRS Server on your DCS Server machine.
