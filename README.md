@@ -23,7 +23,7 @@ This jukebox script is lightweight because all you need in the .miz file are two
 3. Open GR-MusicLibrary and make the following changes:
     - Insert the root path of your songs' directory as the GRLIB.root variable. All folders must have two backslashes instead of one. For example, it should look something like: ```GRLIB.root = "D:\\Music"```
     - Create or rename a playlist object table. This is the list that Growler Radio will randomize and iterate through when playing.
-      * I have provided an example file that has example playlist: ```GR_Playlist_Vietnam = {}``` 
+      * I have provided an example file that a playlist: ```GR_Playlist_Vietnam``` 
     - Put the file path of your intro .mp3 and the .mp3's length (in seconds). At present, an intro .mp3 is **mandatory.**
       * ```GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}```
     - For each song in the table, put the path, length of the song (in seconds), and the name of the file. It should look something like: 
