@@ -11,8 +11,9 @@ GRLIB = {}
 GRLIB.__index = GRLIB
 GRLIB.root = "D:\\Music" --The root folder for your music files.
 
+--Playlist
 GR_Playlist_Vietnam = {}
-GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}
+GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10} -- File path and length of the intro.
 GR_Playlist_Vietnam.playlist = {
  [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" }, --The remainder of your file path, the length of the song (in seconds), and the name of the song.
  [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
