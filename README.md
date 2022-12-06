@@ -104,7 +104,7 @@ When true, this will send a message to all players informing them of the current
  
  For example, the actual code I use is:
  
- ```GROWLER.RADIOINIT(musicPlaylistVietnam)  ```
+ ```GROWLER.RADIOINIT(GR_Playlist_Vietnam)  ```
 
 As I have previously setup musicPlaylistVietnam.intro and musicPlaylistVietnam.playlist in my GR-MusicLibrary.lua, Growler Radio will know where to find the intro file and all songs in the playlist.
 
