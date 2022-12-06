@@ -138,7 +138,7 @@ My implementation of a jukebox has all .mp3 files sit on the server instead of b
 My code is spaghetti. Until I get things cleaned up, it's going to require a lot of manual effort to setup GR-MusicLibrary.lua. Fortunately, you only need to set it up once.
 
 
-## I'm getting an error on my server from DCS-ExternalAudio.exe when I try to play a song.
+## I'm getting an error on my server from DCS-SR-ExternalAudio.exe when I try to play a song.
 
 This might be because you didn't configure STTS.DIRECTORY, GRLIB.root, or your individual file paths correctly. You can test this yourself by playing a single song via command prompt:
 
@@ -147,9 +147,9 @@ start "" /d "D:\DCS-SimpleRadio-Standalone" /b /min "DCS-SR-ExternalAudio.exe" -
 ```
 Edit the above paths for SRS and your music file (only single back slashes here!) and if it works, you should hear your example song on 232.00 MHz AM at full volume. If it works on the command prompt but not in Growler Radio, then you need to recheck your paths in your GR-MusicLibrary.lua or STTS.Directory
 
-## I've done everthing right yet DCS-ExternalAudio occasionally crashes when playing songs that have worked before.
+## I've done everthing right yet DCS-SR-ExternalAudio.exe occasionally crashes when playing songs that have worked before.
 
-DCS-ExternalAudio occasionally crashes, and I do not know why it does this. CiriBob is an amazing developer, so only reach out to him for issues if- and only if!- you have completely eliminated Growler Radio as a source of your problems. I've found that the vast majority of the time when I'm having problems, it's because I missed something in GR-MusicLibrary.lua.
+DCS-SR-ExternalAudio.exe occasionally crashes, and I do not know why it does this. CiriBob is an amazing developer, so only reach out to him for issues if- and only if!- you have completely eliminated Growler Radio as a source of your problems. I've found that the vast majority of the time when I'm having problems, it's because I missed something in GR-MusicLibrary.lua.
 
 
 
@@ -161,21 +161,21 @@ Currently, Growler Radio will play songs for all players.
 
 ## Why do I hear dead air at the end of some songs or small overlaps with the next song?
 
-This is because DCS-ExternalAudio takes some time to buffer your .mp3 before playing. I do not control how fast DCS-ExternalAudio performs but I have attempted to account for it in such a way as to accommodate your average song length.
+This is because DCS-SR-ExternalAudio.exe takes some time to buffer your .mp3 before playing. I do not control how fast DCS-SR-ExternalAudio.exe performs but I have attempted to account for it in such a way as to accommodate your average song length.
 
 
 
 ## Why can't I stop/skip a song playing instantly?
 
-This is because once Growler Radio sends a song to DCS-External Audio, it's really out of my control. I'm sure there's some way to stop DCS-ExternalAudio via code coming from DCS, but my previous attempts at pkill have failed. Until I find a solution, the best I can do is have Growler Radio stop any additional songs from playing.
+This is because once Growler Radio sends a song to DCS-External Audio, it's really out of my control. I'm sure there's some way to stop DCS-SR-ExternalAudio.exe via code coming from DCS, but my previous attempts at pkill have failed. Until I find a solution, the best I can do is have Growler Radio stop any additional songs from playing.
 
 
 
 ## Does this work with my favorite 8-hour song loop?
 
-The longest song I have tried was Free Bird, which is 10 minutes, 7 seconds long. I have no idea whether DCS-ExternalAudio will work with songs of a longer length, but I imagine that it'll take DCS-ExternalAudio ages to digest it.
+The longest song I have tried was Free Bird, which is 10 minutes, 7 seconds long. I have no idea whether DCS-SR-ExternalAudio.exe will work with songs of a longer length, but I imagine that it'll take DCS-SR-ExternalAudio.exe ages to process.
 
-Only try this at your own risk. I am not responsible for you feeding DCS-ExternalAudio songs of excessive length and your RAM catching on fire.
+Only try this at your own risk. I am not responsible for you feeding DCS-SR-ExternalAudio.exe songs of excessive length and your RAM catching on fire.
 
 
 ## Why is this code so unwieldy and so poorly put together?
@@ -189,10 +189,9 @@ Because I am bad at everything. This is my first major lua project **and** my fi
 I welcome any and all suggestions. I'm hoping to move Growler Radio out of DCS entirely once I've taught myself Python, but that is a long term project of mine.
 
 
+## Did you make DCS-SR-ExternalAudio.exe?
 
-## Did you make DCS-ExternalAudio?
-
-DCS-ExternalAudio was made by Ciribob and I do not support it. 
+DCS-SR-ExternalAudio.exe was made by Ciribob and I do not support it.
 
 ## Is it possible to play this on just an OpenBeta Client and not a dedicated server?
 
