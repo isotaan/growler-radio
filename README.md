@@ -1,9 +1,13 @@
 # growler-radio
-This is a DCS World music jukebox that allows you to play .mp3 files over SRS using ciribob's wonderful Simple Radio Standalone and SimpleTextToSpeech.
+This is a DCS World music jukebox script that allows you to play .mp3 files over SRS using Ciribob's wonderful Simple Radio Standalone and SimpleTextToSpeech framework.
 
-The way that Growler Radio works is that you feed it a table of songs as a playlist, and then tell Growler Radio to randomly play songs from that list. Inside of DCS, a scheduled task will play a song and then wait the length of the song before playing the next song. You must modify the music library file in order for Growler Radio to know where to look for your music files in addition to knowing what the song's name is, and how long the song will play.
+The way that Growler Radio works is that you feed it a table of songs as a playlist. Inside of DCS, a scheduled task from Growler Radio will start playing random songs from your list out through SRS on a frequency of your choice.
 
-Disclaimer: Use at your own risk. This script requires editing MissionScripting.lua, so malicious code may be run from our DCS. This is to be used for entertainment only, and I am not responsible if you play copywrite-protected music. Also, this will eat up your internet bandwidth, so be careful about your usage cap.
+Disclaimer: 
+* Use at your own risk. 
+* Growler Radio requires editing MissionScripting.lua, so malicious code may be run from your DCS. 
+* This is to be used for non-profit entertainment purposes only. 
+* This may eat up your internet bandwidth if you do not use it carefully. Playing hours of .mp3s via SRS endlessly 
 
 ### Setup Part 1 - DCS Server
 1. Download SRS and install it on your server. Do all of the necessary things to configure and run SRS Server on your DCS Server machine.
@@ -71,7 +75,7 @@ STTS uses a string that goes between 0.1 and 1.0 that determines the volume wher
 ```
 GROWLER.VOLUME = "0.4"
 ```
-I highly suggest you keep this at 0.4 as some songs with a strong bass beat will sound awful on some headphones, but feel free to play around.
+I highly suggest you keep this at 0.4 as some songs with a strong bass beat will sound awful on some headphones. Feel free to configure the settings to your taste.
 
 ##### Debug / Verbose Messaging
 
@@ -87,7 +91,8 @@ When true, this will send a message to all players informing them of the current
 2. Load your edited GR-MusicLibrary.lua
 3. Load GrowlerRadio.lua
 4. You can start the radio via the mission editor trigger DO SCRIPT that runs after the previous 3 steps are completed.
-  GROWLER.RADIOINIT(*yourplaylisthere*))
+  
+  GROWLER.RADIOINIT(**yourplaylisthere**)
  
  For example, the actual code I use is:
  
@@ -111,9 +116,9 @@ This command will skip the **next** queued song and go to the next song. It will
 
 ### FAQ:
 
-**Q.** Isn't this a lot of work?
+**Q.** Isn't this a lot of work to setup? Why isn't this more user-friendly?
 
-**A.** Yes. Yes it is. My code is spaghetti. Until I get things cleaned up, it's going to require a lot of manual effort to setup GR-MusicLibrary.lua. Fortunately, you only need to set it up once.
+**A.** My code is spaghetti. Until I get things cleaned up, it's going to require a lot of manual effort to setup GR-MusicLibrary.lua. Fortunately, you only need to set it up once.
 
 
 
@@ -154,7 +159,7 @@ Edit the above paths for SRS and your music file (only single back slashes here!
 
 **Q.** Why is this code so unwielding and such a kludge?
 
-**A.** I am bad at everything and this is my first major lua project **and** my first major github project. I'm certain smarter people than me will find better solutions to what I do.
+**A.** Because I am bad at everything. This is my first major lua project **and** my first major github project. I'm certain smarter people than myself will find better solutions to this.
 
 
 
@@ -168,4 +173,8 @@ Edit the above paths for SRS and your music file (only single back slashes here!
 
 **A.** No. It was made by CiriBob and I do not support it. 
 
+
+**Q.** I've done everthing right yet DCS-ExternalAudio occasionally crashes when playing songs that have worked before.
+
+**A.** DCS-ExternalAudio occasionally crashes, and I do not know why it does this. CiriBob is an amazing developer, so only reach out to him for issues if- and only if!- you have completely eliminated Growler Radio as a source of your problems. I've found that the vast majority of the time when I'm having problems, it's because I missed something in GR-MusicLibrary.lua.
 
