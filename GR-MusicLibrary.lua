@@ -4,14 +4,17 @@
 -- For use with Growler Radio, a DCS/SRS-based music player.
 --------------------------------------------------
 
+
+--Below is an example of what GR-MusicLibrary.lua should look like. You must edit this document in accordance with the readme.
+
 GRLIB = {}
 GRLIB.__index = GRLIB
-GRLIB.root = "D:\\Music"
+GRLIB.root = "D:\\Music" --The root folder for your music files.
 
 GR_Playlist_Vietnam = {}
 GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}
 GR_Playlist_Vietnam.playlist = {
- [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" },
+ [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" }, --The remainder of your file path, the length of the song (in seconds), and the name of the song.
  [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
 }
   
