@@ -164,8 +164,6 @@ You might have forgotten to edit MissionScripting.lua in Part 1. If that script 
 
 DCS-SR-ExternalAudio.exe occasionally crashes, and I do not know why it does this. CiriBob is an amazing developer, so only reach out to him for issues if- and only if!- you have completely eliminated Growler Radio as a source of your problems. I've found that the vast majority of the time when I'm having problems, it's because I missed something in GR-MusicLibrary.lua.
 
-## I'm getting an error saying
-
 ## Does this play songs for all sides, or can I pick whether to play this for just Red or Blue?
 
 Currently, Growler Radio will play songs for all players.
