@@ -137,14 +137,21 @@ My implementation of a jukebox has all .mp3 files sit on the server instead of b
 My code is spaghetti. Until I get things cleaned up, it's going to require a lot of manual effort to setup GR-MusicLibrary.lua. Fortunately, you only need to set it up once.
 
 
-## I'm getting an error on my server from DCS-SR-ExternalAudio.exe when I try to play a song.
+## Why am I getting an error on my server from DCS-SR-ExternalAudio.exe when I try to play a song?
 
 This might be because you didn't configure STTS.DIRECTORY, GRLIB.root, or your individual file paths correctly. You can test this yourself by playing a single song via command prompt:
 
 ```
 start "" /d "D:\DCS-SimpleRadio-Standalone" /b /min "DCS-SR-ExternalAudio.exe" -i "D:\Music\Vietnam\Song1.mp3" -f 232 -m AM -c 2 -p 5002 -n "Growler Radio" -v 1.0 -h
 ```
-Edit the above paths for SRS and your music file (only single back slashes here!) and if it works, you should hear your example song on 232.00 MHz AM at full volume. If it works on the command prompt but not in Growler Radio, then you need to recheck your paths in your GR-MusicLibrary.lua or STTS.Directory
+Edit the above paths for SRS and your music file (only single back slashes here!). If the command works, you should see activity in your command prompt on your server while music plays at 232.00 MHz AM at full volume.
+
+If it works when testing the song via command prompt but gives an error popup, then check your GR-MusicLibrary.lua or STTS.DIRECTORY.
+
+## Songs don't play but I don't get any error on my server. What gives?
+
+You might have forgotten to edit MissionScripting.lua in Part 1. If that script is not edited prior to DCS Server starting, then DCS will be unable to communicate with DCS-SR-ExternalAudio.exe.
+
 
 ## I've done everthing right yet DCS-SR-ExternalAudio.exe occasionally crashes when playing songs that have worked before.
 
