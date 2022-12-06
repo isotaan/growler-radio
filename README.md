@@ -3,6 +3,8 @@ This is a lightweight DCS World music jukebox script that allows you to play .mp
 
 The way that Growler Radio works is that you feed it a table of songs as a playlist. Inside of DCS, a scheduled task from Growler Radio will start playing random songs from your list out through SRS on a frequency of your choice.
 
+This jukebox script is lightweight because all you need in the .miz file are two .lua scipts. All .mp3 files will have to be present on the server.
+
 #### Disclaimer: 
 * Use at your own risk. 
 * Growler Radio requires editing MissionScripting.lua, so malicious code may be run from your DCS. 
