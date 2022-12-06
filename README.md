@@ -140,7 +140,7 @@ My implementation of a jukebox has all .mp3 files sit on the server instead of b
 My code is spaghetti. Until I get things cleaned up, it's going to require a lot of manual effort to setup GR-MusicLibrary.lua. Fortunately, you only need to set it up once.
 
 
-## Why am I getting an error on my server from DCS-SR-ExternalAudio.exe when I try to play a song?
+## What is error "System.IO.DirectoryNotFoundException" for DCS-SR-ExternalAudio.exe?
 
 This might be because you didn't configure STTS.DIRECTORY, GRLIB.root, or your individual file paths correctly. You can test this yourself by playing a single song via command prompt:
 
@@ -151,6 +151,10 @@ Edit the above paths for SRS and your music file (only single back slashes here!
 
 If it works when testing the song via command prompt but gives an error popup, then check your GR-MusicLibrary.lua or STTS.DIRECTORY.
 
+## What is error "NAudio.MmException" for DCS-SR-ExternalAudio.exe?
+
+This is likely because you don't have codecs installed on your server.
+
 ## Songs don't play but I don't get any error on my server. What gives?
 
 You might have forgotten to edit MissionScripting.lua in Part 1. If that script is not edited prior to DCS Server starting, then DCS will be unable to communicate with DCS-SR-ExternalAudio.exe.
@@ -160,7 +164,7 @@ You might have forgotten to edit MissionScripting.lua in Part 1. If that script 
 
 DCS-SR-ExternalAudio.exe occasionally crashes, and I do not know why it does this. CiriBob is an amazing developer, so only reach out to him for issues if- and only if!- you have completely eliminated Growler Radio as a source of your problems. I've found that the vast majority of the time when I'm having problems, it's because I missed something in GR-MusicLibrary.lua.
 
-
+## I'm getting an error saying
 
 ## Does this play songs for all sides, or can I pick whether to play this for just Red or Blue?
 
