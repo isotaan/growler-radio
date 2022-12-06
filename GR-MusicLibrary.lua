@@ -6,14 +6,21 @@
 
 GRLIB = {}
 GRLIB.__index = GRLIB
-GRLIB.root = "D:\\Music" -- Put your root directory here
+GRLIB.root = "D:\\Music"
 
-musicPlaylistVietnam = {}
-  musicPlaylistVietnam.intro = {path = "\\Folder\\intro.mp3",length = 10} --Intro for your playlist
-  musicPlaylistVietnam.playlist = {
-    [1] = {path = "\\Folder\\Song1.mp3",length = 69,name = "Song 1" }, -- Put the rest of your song paths here
-    [2] = {path = "\\Folder\\Song2.mp3",length = 70,name = "Song 2" },
-    [3] = {path = "\\Folder\\Song3.mp3",length = 71,name = "Song 3" },
-  }
+GR_Playlist_Vietnam = {}
+GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}
+GR_Playlist_Vietnam.playlist = {
+ [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" },
+ [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
+}
+  
+GR_Playlist_Classical = {}
+GR_Playlist_Classical.intro = {path = "\\Classical\\intro_Classical.mp3",length = 10}
+GR_Playlist_Classical.playlist = {
+ [1] = {path = "\\Classical\\Song1.mp3",length = 100,name = "Classical Song #1" },
+ [2] = {path = "\\Classical\\Song2.mp3",length = 102,name = "Classical Song #2"},
+}  
+  
    
 env.info( "******** Growler Radio Music Library Loaded ********" )
