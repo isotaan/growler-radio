@@ -21,16 +21,14 @@ The way that Growler Radio works is that you feed it a table of songs as a playl
 3. Open GR-MusicLibrary and make the following changes:
     - Insert the root path of your songs' directory as the GRLIB.root variable. All folders must have two backslashes instead of one. For example, it should look something like: ```GRLIB.root = "D:\\Music"```
     - Create or rename a playlist object table. This is the list that Growler Radio will randomize and iterate through when playing.
-      * I have provided an example file that has example playlist: ```musicPlaylistVietnam = {}``` 
+      * I have provided an example file that has example playlist: ```GR_Playlist_Vietnam = {}``` 
     - Put the file path of your intro .mp3 and the .mp3's length (in seconds). At present, an intro .mp3 is **mandatory.**
-      * ```musicPlaylistVietnam.intro = {path = "\\Vietnam\\intro.mp3",length = 10}```
-    - For each song in the table, put the path, length of the song (in seconds), and the name of the file.
-      * It should look something like: 
-        ```
-        [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Song Artist - Nice" },
-        [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Song Artist - Not Nice"},
-        ...
-        ```
+      * ```musicPlaylistVietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}```
+    - For each song in the table, put the path, length of the song (in seconds), and the name of the file. It should look something like: 
+       ``` [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" },
+       ``` [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
+
+        
     * You can name the files whatever you want, just keep in mind that you *must* have valid files that STTS will recognize.
     * If you do not correctly input the length of the songs, you will either have songs play over each other, or you will have excessive dead air.
     * You are truncating the file paths to exclude the portion listed in the GRLIB.root path. If you have a file that has a path of D:\Music\Vietnam\Song1.mp3, you will put:
@@ -60,8 +58,7 @@ GR_Playlist_Classical.intro = {path = "\\Classical\\intro_Classical.mp3",length 
 GR_Playlist_Classical.playlist = {
  [1] = {path = "\\Classical\\Song1.mp3",length = 100,name = "Classical Song #1" },
  [2] = {path = "\\Classical\\Song2.mp3",length = 102,name = "Classical Song #2"},
-}  
-  
+}   
 ```
 
 # Setup Part 3 - Edit GrowlerRadio.lua (optional)
