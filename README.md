@@ -1,5 +1,5 @@
 # growler-radio
-This is a DCS World music jukebox script that allows you to play .mp3 files over SRS using Ciribob's wonderful [SimpleRadioStandalone](https://github.com/ciribob/DCS-SimpleRadioStandalone) and [SimpleTextToSpeech](https://github.com/ciribob/DCS-SimpleTextToSpeech) framework.
+This is a lightweight DCS World music jukebox script that allows you to play .mp3 files to players on multiplayer servers using SRS using Ciribob's wonderful [SimpleRadioStandalone](https://github.com/ciribob/DCS-SimpleRadioStandalone) and [SimpleTextToSpeech](https://github.com/ciribob/DCS-SimpleTextToSpeech) framework.
 
 The way that Growler Radio works is that you feed it a table of songs as a playlist. Inside of DCS, a scheduled task from Growler Radio will start playing random songs from your list out through SRS on a frequency of your choice.
 
@@ -41,19 +41,27 @@ The way that Growler Radio works is that you feed it a table of songs as a playl
     ```  
 4. Ensure that you have all components of your modified GR-MusicLibrary.lua!
 
-Below is a complete GR-MusicLibrary.lua file that has an intro and two songs:
+Below is a complete GR-MusicLibrary.lua file that has four songs in two playlists:
 
 ```
 GRLIB = {}
 GRLIB.__index = GRLIB
 GRLIB.root = "D:\\Music"
 
-musicPlaylistVietnam = {}
-  musicPlaylistVietnam.intro = {path = "\\Vietnam\\intro.mp3",length = 10}
-  musicPlaylistVietnam.playlist = {
-    [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Song Artist - Nice" },
-    [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Song Artist - Not Nice"},
-  }
+GR_Playlist_Vietnam = {}
+GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10}
+GR_Playlist_Vietnam.playlist = {
+ [1] = {path = "\\Vietnam\\Song1.mp3",length = 69,name = "Fortunate Son" },
+ [2] = {path = "\\Vietnam\\Song2.mp3",length = 71,name = "Some Other Vietnam War Song"},
+}
+  
+GR_Playlist_Classical = {}
+GR_Playlist_Classical.intro = {path = "\\Classical\\intro_Classical.mp3",length = 10}
+GR_Playlist_Classical.playlist = {
+ [1] = {path = "\\Classical\\Song1.mp3",length = 100,name = "Classical Song #1" },
+ [2] = {path = "\\Classical\\Song2.mp3",length = 102,name = "Classical Song #2"},
+}  
+  
 ```
 
 # Setup Part 3 - Edit GrowlerRadio.lua (optional)
@@ -106,6 +114,10 @@ As I have previously setup musicPlaylistVietnam.intro and musicPlaylistVietnam.p
 
 This command will initialize and play Growler Radio. Currently, Growler Radio only allows one instance to run at a time. You must present a valid playlist in the correct format as described in Part 2 of the above instructions.
 
+This command only needs to be run once. After playing the intro, Growler Radio will randomize your playlist and start going through all of the songs. Once at the end of the songs, Growler Radio will automatically stop and send a message to all players.
+
+At this point, you can restart Growler Radio either with the same playlist or with another playlist.
+
 ### GROWLER.GROWLERSTOP()
 
 This command will stop the **next** song from playing. It will not stop the current song.
@@ -115,6 +127,11 @@ This command will stop the **next** song from playing. It will not stop the curr
 This command will skip the **next** queued song and go to the next song. It will not stop the current song. Currently only useful if you have ```GROWLER.VERBOSE = true```
 
 # Frequently Asked Questions
+
+## Why do this? Why all of the work when DCS has triggers to play sounds?
+DCS mission files are archives that contain every trigger, script, and song. The full .miz file must be downloaded by every player when they load into your mission. For single-player this isn't a big deal, but for multiplayer it can cause excessively long load times and crashes. Having the songs in the .miz file means that players' .trk files will become *enormous*, especially if they keep leaving and rejoining the server.
+
+My implementation of a jukebox has all .mp3 files sit on the server instead of being handed off to clients. Players on a multiplayer server only need SRS to be able to listen to the songs. Since all files sit on the server, you can put as many songs as you want, provided that each song has an entry in GR-MusicLibrary.lua.
 
 ## Isn't this a lot of work to setup? Why isn't this more user-friendly?
 
@@ -142,9 +159,9 @@ Currently, Growler Radio will play songs for all players.
 
 
 
-## I've noticed that there will be gaps in songs or dead air even if I got the exact length of my songs.
+## Why do I hear dead air at the end of some songs or small overlaps with the next song?
 
-This is because DCS-ExternalAudio takes some time to buffer songs. I do not control this but I have attempted to account for it in my code by adding some buffer time.
+This is because DCS-ExternalAudio takes some time to buffer your .mp3 before playing. I do not control how fast DCS-ExternalAudio performs but I have attempted to account for it in such a way as to accommodate your average song length.
 
 
 
@@ -154,9 +171,11 @@ This is because once Growler Radio sends a song to DCS-External Audio, it's real
 
 
 
-### Does this work with my favorite 8-hour song loop?
+## Does this work with my favorite 8-hour song loop?
 
-The longest song I have tried was Free Bird, which is 10 minutes, 7 seconds long. I have no idea whether DCS-ExternalAudio will work with songs of a longer length. I do not know whether your server's RAM will set on fire and explode if you try your favorite 10-hour chill song. If that happens, I am not responsible for you feeding DCS-ExternalAudio songs of excessive length- please do not try.
+The longest song I have tried was Free Bird, which is 10 minutes, 7 seconds long. I have no idea whether DCS-ExternalAudio will work with songs of a longer length, but I imagine that it'll take DCS-ExternalAudio ages to digest it.
+
+Only try this at your own risk. I am not responsible for you feeding DCS-ExternalAudio songs of excessive length and your RAM catching on fire.
 
 
 ## Why is this code so unwieldy and so poorly put together?
