@@ -1,13 +1,12 @@
 --------------------------------------------------
 -- Growler Radio
 -- By isotaan
--- A music player for DCS World to be used via SRS
 --------------------------------------------------
 
 GROWLER = {}
 GROWLER.__index = GROWLER
 
-GROWLER.FREQ = "232,110,42.75" -- A string that is the frequency (or frequencies) to be played at. Example: "232" or "232,30"
+GROWLER.FREQ = "232,110,41" -- A string that is the frequency (or frequencies) to be played at. Example: "232" or "232,30"
 GROWLER.MODULATION = "AM,AM,FM" -- A string that provides the radio modulation(s). Can be used for multiple frequencies: Example: "AM" or "AM, FM"
 GROWLER.VOLUME = "0.4" -- A string between 0.1 and 1 that determines the volume of the sound through SRS
 GROWLER.TRACKNUM = nil
@@ -35,7 +34,7 @@ end
 
 function GROWLER.INTROMESSAGE()
 
-  trigger.action.outText(string.format("Growler Radio has started playing \n\nFrequency \n232.00 AM\n110.00 AM\n42.75 FM\n\nNumber of tracks: %d", #GROWLER.SHUFFLETABLE), 10 , false)
+  trigger.action.outText(string.format("Growler Radio has started playing \n\nFrequency \n232.00 AM\n110.00 AM\n41.00 FM\n\nNumber of tracks: %d", #GROWLER.SHUFFLETABLE), 10 , false)
 
 end
 
@@ -64,38 +63,56 @@ end
 function GROWLER.RADIOINIT(args)
 --Initializes the radio player.
 --Args is a table of the playlist from a MusicLibrary
-  if (GROWLER.RADIOPLAYINGFLAG == false) then
-        
-    if (args == nil) then
-        GROWLER.MUSICLIST = musicPlaylistVietnam
+  
+  -- Checks if sanitization has occured
+  if lfs and io  then
+
+    --Checks if Growler Radio is currently playing
+    if (GROWLER.RADIOPLAYINGFLAG == false) then
+          
+      if (args == nil) then
+        env.info("No playlist has been specified. Please consult the Growler Radio documentation.")
       else
         GROWLER.MUSICLIST = args
-      end
-      
-    
-    GROWLER.KILLSWITCH = false
-    GROWLER.RADIOPLAYINGFLAG = true
-    GROWLER.RADIOSTOPFLAG = false
-    GROWLER.TRACKNUM = 1
-      
-    GROWLER.SHUFFLETABLE = GROWLER.SHUFFLE(GROWLER.MUSICLIST.playlist)
-    
-    --Feel free to customize this with whatever you want when the radio starts.
- 
-    local filePath = GRLIB.root .. GROWLER.MUSICLIST.intro.path
- 
-    STTS.PlayMP3(filePath,GROWLER.FREQ,GROWLER.MODULATION,GROWLER.VOLUME,"Growler Radio",2)
-    
-    local playScheduler = SCHEDULER:New( nil, 
-      function()
-        GROWLER.GROWLERRADIOPLAY()
-      end, {}, musicPlaylistVietnam.intro.length
-    )
-        
-  else
-    trigger.action.outText("Growler Radio is already playing!" , 10 , false)
-  end
 
+
+
+      GROWLER.KILLSWITCH = false
+      GROWLER.RADIOPLAYINGFLAG = true
+      GROWLER.RADIOSTOPFLAG = false
+      GROWLER.TRACKNUM = 1
+
+      GROWLER.SHUFFLETABLE = GROWLER.SHUFFLE(GROWLER.MUSICLIST.playlist)
+
+      --Feel free to customize this with whatever you want when the radio starts.
+
+      local filePath = CSG8LIB.root .. GROWLER.MUSICLIST.intro.path
+
+      --Plays the intro music.
+    
+      STTS.PlayMP3(filePath,GROWLER.FREQ,GROWLER.MODULATION,GROWLER.VOLUME,"Growler Radio",2)
+
+      --Schedules the first song in the playlist
+      
+      local delayTime = timer.getTime() + GROWLER.MUSICLIST.intro.length
+      
+      
+      timer.scheduleFunction(GROWLER.GROWLERRADIOPLAY, {},delayTime)
+
+      --createScheduler()
+      --[[
+      local playScheduler = SCHEDULER:New( nil, 
+        function()
+        GROWLER.GROWLERRADIOPLAY()
+        end, {}, musicPlaylistVietnam.intro.length
+      )]]
+      end
+    else
+      trigger.action.outText("Growler Radio is already playing!" , 10 , false)
+    end
+  else
+    env.info("DCS MissionScripting.lua has not been sanitized. Growler Radio is unable to play.")
+  end
 end
 
 -- Schedules the next song for playing.
@@ -108,25 +125,17 @@ function GROWLER.SCHEDULENEXT()
       trigger.action.outText(string.format("Queueing Track %d \n%s",GROWLER.TRACKNUM, GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].name), 10 , false)
     end
     
-    local playScheduler = SCHEDULER:New( nil, 
-      function()
-        GROWLER.GROWLERRADIOPLAY()
-      end, {}, (GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM-1].length*1.05)
-    )
-    
-    collectgarbage()
-    
+    local delayTime = (timer.getTime() + GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM-1].length*1.05)
+        
+    --createScheduler()
+    timer.scheduleFunction(GROWLER.GROWLERRADIOPLAY, {}, delayTime)
+  
   elseif (GROWLER.RADIOSTOPFLAG == true) then
-    
-    local playScheduler = SCHEDULER:New( nil, 
-      function()
-        trigger.action.outText("Growler Radio Has Stopped" , 10 , false)
-        GROWLER.RADIOPLAYINGFLAG = false
-        GROWLER.RADIOSTOPFLAG = false
-      end, {}, (GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM-1].length*1.1)
-    )
-    
-    collectgarbage()
+   
+    local delayTime = timer.getTime() + GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM-1].length*1.05
+
+    --create scheduler
+    timer.scheduleFunction(trigger.action.outText, {"Growler Radio has stopped."},delayTime)
     
   else  
     
@@ -146,12 +155,12 @@ function GROWLER.GROWLERRADIOPLAY()
     if (GROWLER.VERBOSE == true) then
       
       trigger.action.outText(string.format("Now Playing: \n\n%s \nTrack %d of %d \n\nTrack length: %d seconds",GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].name,GROWLER.TRACKNUM, #GROWLER.SHUFFLETABLE, GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].length), 10 , false)
-      
     end
     
     local filePath = GRLIB.root .. GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].path
     
     STTS.PlayMP3(filePath,GROWLER.FREQ,GROWLER.MODULATION,GROWLER.VOLUME,"Growler Radio",2)
+
     
     GROWLER.TRACKNUM = GROWLER.TRACKNUM +1
     

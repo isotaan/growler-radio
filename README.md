@@ -97,10 +97,9 @@ When true, this will send a message to all players informing them of the current
 
 # Setup Part 4 - Setup your mission in the DCS Mission Editor
 1. Load [CiriBob's SimpleTextToSpeech](https://github.com/ciribob/DCS-SimpleTextToSpeech). You will want to configure STTS.DIRECTORY per CiriBob's instructions. You should have already written down the necessary file path when you were following Part 1, Step 2 all of the way at the top of this screen.
-2. Load the latest version of [MOOSE](https://github.com/FlightControl-Master/MOOSE/). (Note: this is planned to be removed as a required application)
-3. Load your edited GR-MusicLibrary.lua
-4. Load GrowlerRadio.lua
-5. You can start the radio via the mission editor trigger DO SCRIPT that runs after the previous 3 steps are completed.
+2. Load your edited GR-MusicLibrary.lua
+3. Load GrowlerRadio.lua
+4. You can start the radio via the mission editor trigger DO SCRIPT that runs after the previous 3 steps are completed.
   
   GROWLER.RADIOINIT(**yourplaylisthere**)
  
