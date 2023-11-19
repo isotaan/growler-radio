@@ -7,10 +7,6 @@
 
 --Below is an example of what GR-MusicLibrary.lua should look like. You must edit this document in accordance with the readme.
 
-GRLIB = {}
-GRLIB.__index = GRLIB
-GRLIB.root = "D:\\Music" --The root folder for your music files.
-
 --Playlist
 GR_Playlist_Vietnam = {}
 GR_Playlist_Vietnam.intro = {path = "\\Vietnam\\intro_Vietnam.mp3",length = 10} -- File path and length of the intro.
@@ -27,4 +23,4 @@ GR_Playlist_Classical.playlist = {
 }  
   
    
-env.info( "******** Growler Radio Music Library Loaded ********" )
+env.info( "GROWLER RADIO | Growler Radio Music Library Loaded" )
