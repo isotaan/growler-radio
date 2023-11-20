@@ -1,7 +1,7 @@
 --------------------------------------------------
 -- Growler Radio
 -- By isotaan
--- Growler Radio Version: dev-2023-11-19T13:48:41Z
+-- Growler Radio Version: dev-2023-11-19T22:27:39Z
 --------------------------------------------------
 
 GROWLER = {}
@@ -149,7 +149,7 @@ function GROWLER.GROWLERRADIOPLAY()
     end
       
     env.info(string.format("GROWLER RADIO | Now Playing %s  |Track %d of %d | Track length: %d seconds",GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].name,GROWLER.TRACKNUM, #GROWLER.SHUFFLETABLE, GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].length), 10 , false)
-    --env.info(string.format("Volume: %s", GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].vol))
+
     local filePath = GROWLER.MUSICROOT .. GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].path
     local vol = GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].vol
     
@@ -200,27 +200,23 @@ function GROWLER.SCHEDULENEXT()
       delayTime = timer.getTime() + 3
       GROWLER.FIRSTPLAY = false
     end    
+    
     --createScheduler()
     timer.scheduleFunction(GROWLER.GROWLERRADIOPLAY, {}, delayTime)
   
   elseif (GROWLER.RADIOSTOPFLAG == true) then
-   
-    --local delayTime = timer.getTime() + GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM-1].length*1.05
-
-    --create scheduler
-    --timer.scheduleFunction(trigger.action.outText, {"Growler Radio has stopped."},delayTime)
-    
+       
     local delayTime = timer.getTime() + 1
 
     --create scheduler
-    timer.scheduleFunction(GROWLER.MESSAGE_STOP(),delayTime)
+    timer.scheduleFunction(GROWLER.MESSAGE_STOP,delayTime)
     
   else  
     
     local delayTime = timer.getTime() + GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM-1].length*1.05
 
     --create scheduler
-    timer.scheduleFunction(GROWLER.MESSAGE_STOP(), nil,delayTime)
+    timer.scheduleFunction(GROWLER.MESSAGE_STOP, nil,delayTime)
     GROWLER.RADIOPLAYINGFLAG = false
     
   end
@@ -233,14 +229,7 @@ function GROWLER.GROWLERSKIP()
     if ( GROWLER.TRACKNUM < #GROWLER.SHUFFLETABLE ) and (GROWLER.RADIOPLAYINGFLAG == true) then 
       
       GROWLER.TRACKNUM = GROWLER.TRACKNUM +1
-      
-      --GROWLER.GROWLERKILLAUDIO()
-      
-      --GROWLER.CLEARRADIOSCHEDULES()
-      
-      --GROWLER.GROWLERRADIOPLAY()
-      
-      
+           
       if (GROWLER.VERBOSE == true) then
         trigger.action.outText(string.format("GROWLER RADIO : Queueing Track %d | %s",GROWLER.TRACKNUM, GROWLER.SHUFFLETABLE[GROWLER.TRACKNUM].name), 10 , false)
       end
@@ -267,7 +256,7 @@ function GROWLER.INTROMESSAGE()
   env.info(string.format("GROWLER RADIO | Growler Radio has started playing | Frequency | 232.00 AM, 137.00 AM, 41.00 FM"), 10 , false)
 end
 
-env.info( "GROWLER RADIO | Growler Radio dev-2023-11-19T13:48:41Z loaded" )
+env.info( "GROWLER RADIO | Growler Radio dev-2023-11-19T22:27:39Z loaded" )
 
 
 if (Debug == true) then
